@@ -21,5 +21,5 @@ one git tag `v<version>` in the platform repo fixes `plugin.json` `version`, the
 `source.ref` / `source.sha`.
 
 Current release: **v0.6.0** — `plugins[0].source.ref` is pinned to tag `v0.6.0`
-(sha `779d2fe`), `plugins[0].version` is `0.6.0`. The `agent-platform` package the
+(sha `5624be9`), `plugins[0].version` is `0.6.0`. The `agent-platform` package the
 SKILL prerequisites install is the same tag.
