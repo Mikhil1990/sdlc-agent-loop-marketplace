@@ -10,7 +10,7 @@
   "plugins": [
     {
       "name": "sdlc-agent-loop",
-      "version": "0.6.13",
+      "version": "0.6.14",
       "description": "The six-agent closed loop for AI-Assisted-Software-Development: Product Understanding, Incident Learning, Change Impact Analysis, Code Correction, Feature Planning, and Feature Build. Traces blast radius on a diff, cites past incidents that touched the same code, proposes a test-validated safeguard PR, and can take a plain-language feature request all the way to a self-checked draft PR.",
       "homepage": "https://github.com/Mikhil1990/AI-Assisted-Software-Development/tree/main/claude_plugin",
       "repository": "https://github.com/Mikhil1990/AI-Assisted-Software-Development",
@@ -19,8 +19,8 @@
         "source": "git-subdir",
         "url": "https://github.com/Mikhil1990/AI-Assisted-Software-Development.git",
         "path": "claude_plugin",
-        "ref": "v0.6.13",
-        "sha": "10ede50ef6b097d65e7bc2233dcf10cdf1c06fa0"
+        "ref": "v0.6.14",
+        "sha": "95c8822a06e17ed0b86647db239a676439a0be29"
       }
     }
   ]
