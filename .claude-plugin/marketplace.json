@@ -6,22 +6,16 @@
     "email": "shetty.mik@gmail.com",
     "url": "https://github.com/Mikhil1990"
   },
-  "description": "Private, org-scoped distribution of the sdlc-agent-loop Claude Code plugin (ADR 0052). Read access is granted to a connected organization as part of its connection to the hosted platform; the plugin source and the agent-platform package stay access-gated.",
+  "description": "Public distribution of the sdlc-agent-loop Claude Code plugin. Each release tag carries the matching agent-platform wheel (ADR 0052 / 0228).",
   "plugins": [
     {
       "name": "sdlc-agent-loop",
-      "version": "0.6.14",
+      "version": "0.6.15",
       "description": "The six-agent closed loop for AI-Assisted-Software-Development: Product Understanding, Incident Learning, Change Impact Analysis, Code Correction, Feature Planning, and Feature Build. Traces blast radius on a diff, cites past incidents that touched the same code, proposes a test-validated safeguard PR, and can take a plain-language feature request all the way to a self-checked draft PR.",
-      "homepage": "https://github.com/Mikhil1990/AI-Assisted-Software-Development/tree/main/claude_plugin",
-      "repository": "https://github.com/Mikhil1990/AI-Assisted-Software-Development",
+      "homepage": "https://github.com/Mikhil1990/sdlc-agent-loop-marketplace",
+      "repository": "https://github.com/Mikhil1990/sdlc-agent-loop-marketplace",
       "license": "LicenseRef-Proprietary",
-      "source": {
-        "source": "git-subdir",
-        "url": "https://github.com/Mikhil1990/AI-Assisted-Software-Development.git",
-        "path": "claude_plugin",
-        "ref": "v0.6.14",
-        "sha": "95c8822a06e17ed0b86647db239a676439a0be29"
-      }
+      "source": "./plugins/sdlc-agent-loop"
     }
   ]
 }
