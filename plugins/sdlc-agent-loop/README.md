@@ -69,10 +69,9 @@ you do **not** need a checkout of this monorepo. A working install needs:
    this plugin's own release — **not** from PyPI, **not** an editable checkout. `uv tool`
    puts it in its own isolated environment and on your `PATH`:
    ```bash
-   uv tool install "agent-platform[monitoring] @ https://github.com/Mikhil1990/sdlc-agent-loop-marketplace/releases/download/v0.7.0/agent_platform-0.7.0-py3-none-any.whl"
-   agent-cli --version   # agent-cli 0.7.0
+   uv tool install "agent-platform @ https://github.com/Mikhil1990/sdlc-agent-loop-marketplace/releases/download/v0.7.1/agent_platform-0.7.1-py3-none-any.whl"
+   agent-cli --version   # agent-cli 0.7.1
    ```
-   The `[monitoring]` extra is recommended: `agent-cli doctor`'s packet-wiring check needs it.
    The plugin and this package release as a **locked pair** — one tag fixes both versions
    (ADR 0052 §3, [ADR 0228](../docs/decisions/0228-distribution-is-a-public-marketplace-repo-plus-a-release-attached-wheel.md)).
    To upgrade, install the new release's wheel the same way (`uv tool install --force`).

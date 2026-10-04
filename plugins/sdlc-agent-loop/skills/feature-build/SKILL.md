@@ -31,7 +31,7 @@ call reasoning with none of this conversation's context.
 - A Design the Tech Lead signed in the web app. Step 0 lists what is ready; Step 1 admits it
   and writes the work file. Never build from an unsigned plan.
 - `agent-cli` must be installed from the pinned release wheel (**not** an editable checkout):
-  `uv tool install "agent-platform @ https://github.com/Mikhil1990/sdlc-agent-loop-marketplace/releases/download/v0.7.0/agent_platform-0.7.0-py3-none-any.whl"`,
+  `uv tool install "agent-platform @ https://github.com/Mikhil1990/sdlc-agent-loop-marketplace/releases/download/v0.7.1/agent_platform-0.7.1-py3-none-any.whl"`,
   and `gh` authenticated for the target repo. See
   [the plugin README § Prerequisites](../../README.md#prerequisites) for the full list
   (`codebase-memory-mcp`, `AGENT_PLATFORM_API_URL` / `_PAT`, an onboarded repo);
