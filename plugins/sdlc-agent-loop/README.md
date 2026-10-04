@@ -65,16 +65,25 @@ you do **not** need a checkout of this monorepo. A working install needs:
    A transient outage mid-run is tolerated (the run spools to
    `~/.agent-platform/spool/runs.jsonl`); there is no offline / anonymous mode
    ([ADR 0032](../docs/decisions/0032-all-surfaces-authenticate-through-the-hosted-app.md)).
-4. **The `agent-platform` package** (provides `agent-cli`), installed from the wheel attached to
+4. **The `vyomgrid-agent-platform` package** (provides `agent-cli`), installed from the wheel attached to
    this plugin's own release — **not** from PyPI, **not** an editable checkout. `uv tool`
    puts it in its own isolated environment and on your `PATH`:
    ```bash
-   uv tool install "agent-platform @ https://github.com/Mikhil1990/sdlc-agent-loop-marketplace/releases/download/v0.7.1/agent_platform-0.7.1-py3-none-any.whl"
-   agent-cli --version   # agent-cli 0.7.1
+   uv tool install "vyomgrid-agent-platform @ https://github.com/Mikhil1990/sdlc-agent-loop-marketplace/releases/download/v0.7.2/vyomgrid_agent_platform-0.7.2-py3-none-any.whl"
+   agent-cli --version   # agent-cli 0.7.2
    ```
    The plugin and this package release as a **locked pair** — one tag fixes both versions
    (ADR 0052 §3, [ADR 0228](../docs/decisions/0228-distribution-is-a-public-marketplace-repo-plus-a-release-attached-wheel.md)).
    To upgrade, install the new release's wheel the same way (`uv tool install --force`).
+
+   To take the newest release without naming a version (not for a plugin you pinned — the plugin
+   and the package must match):
+   ```bash
+   uv tool install --upgrade vyomgrid-agent-platform --find-links https://github.com/Mikhil1990/sdlc-agent-loop-marketplace/releases/expanded_assets/latest
+   ```
+   **Installed it before 0.7.2 under the old name `agent-platform`?** Run
+   `uv tool uninstall agent-platform` first, then one of the lines above. Both names provide
+   `agent-cli`, so the new install stops on the old one.
 5. **The plugin**, from the public marketplace:
    ```bash
    claude plugin marketplace add Mikhil1990/sdlc-agent-loop-marketplace

@@ -14,7 +14,7 @@ earlier version of this skill that shelled out to `agent-cli correct` (since ret
 *second*, separate `claude` CLI subprocess for both the patch-generation LLM call and
 the correction pipeline — reasoning with none of this conversation's context.
 
-**Repo profile:** if `.sdlc-agent*/AGENTS.md` exists at the repo root, read it first — it is the authoritative execution contract for this repository (build/test commands, local conventions) and, where it conflicts with anything else in this tree, this file wins.
+**Repo profile:** `.sdlc-agent*/AGENTS.md` at the repo root is the authoritative execution contract for this repository (build/test commands, local conventions); where it conflicts with anything else in this tree, it wins. It is written from the web app only when a context command runs with `--repo-connection-id` (Step 1 below does not pass one), so it may be missing; if it exists, read it before Step 3.
 
 ## Prerequisites
 
@@ -23,7 +23,7 @@ the correction pipeline — reasoning with none of this conversation's context.
   postmortem folder for there to be anything to correlate against (see the
   `incident-learning` skill for the postmortem format).
 - `agent-cli` must be installed from the pinned release wheel (**not** an editable checkout):
-  `uv tool install "agent-platform @ https://github.com/Mikhil1990/sdlc-agent-loop-marketplace/releases/download/v0.7.1/agent_platform-0.7.1-py3-none-any.whl"`,
+  `uv tool install "vyomgrid-agent-platform @ https://github.com/Mikhil1990/sdlc-agent-loop-marketplace/releases/download/v0.7.2/vyomgrid_agent_platform-0.7.2-py3-none-any.whl"`,
   and `gh` authenticated for the target repo. See
   [the plugin README § Prerequisites](../../README.md#prerequisites) for the full list
   (`codebase-memory-mcp`, `AGENT_PLATFORM_API_URL` / `_PAT`, an onboarded repo);

@@ -22,7 +22,7 @@ Same pattern as `code-correction`: split into deterministic steps (context, appl
 native reasoning (the actual implementation) so there's no nested `claude` CLI subprocess
 call reasoning with none of this conversation's context.
 
-**Repo profile:** if `.sdlc-agent*/AGENTS.md` exists at the repo root, read it first — it is the authoritative execution contract for this repository (build/test commands, local conventions) and, where it conflicts with anything else in this tree, this file wins.
+**Repo profile:** `.sdlc-agent*/AGENTS.md` at the repo root is the authoritative execution contract for this repository (build/test commands, local conventions); where it conflicts with anything else in this tree, it wins. `agent-cli plan-context` (Step 4) writes it from the web app and prints it in its output, so on a first run it does not exist before Step 4. If it exists when the run starts, read it then; either way, read the copy Step 4 prints before you write the patch.
 
 ## Prerequisites
 
@@ -31,7 +31,7 @@ call reasoning with none of this conversation's context.
 - A Design the Tech Lead signed in the web app. Step 0 lists what is ready; Step 1 admits it
   and writes the work file. Never build from an unsigned plan.
 - `agent-cli` must be installed from the pinned release wheel (**not** an editable checkout):
-  `uv tool install "agent-platform @ https://github.com/Mikhil1990/sdlc-agent-loop-marketplace/releases/download/v0.7.1/agent_platform-0.7.1-py3-none-any.whl"`,
+  `uv tool install "vyomgrid-agent-platform @ https://github.com/Mikhil1990/sdlc-agent-loop-marketplace/releases/download/v0.7.2/vyomgrid_agent_platform-0.7.2-py3-none-any.whl"`,
   and `gh` authenticated for the target repo. See
   [the plugin README § Prerequisites](../../README.md#prerequisites) for the full list
   (`codebase-memory-mcp`, `AGENT_PLATFORM_API_URL` / `_PAT`, an onboarded repo);
@@ -39,6 +39,10 @@ call reasoning with none of this conversation's context.
 - A test command that actually validates the target repo (e.g. `dotnet test`, `pytest -q`,
   `npm test`). Without one, write and show the patch but don't apply it — ask the user for
   the right test command.
+  The repo profile's `Commands` section gives it. When that line reads `Test: not known — please
+  fill this in`, say so, ask the user for the command, and tell them to add it in the web app
+  under **Product → Repositories → this repository → Project notes (AGENTS.md)** so the next run
+  has it. Never edit `.sdlc-agent*/AGENTS.md` directly — the next run overwrites it.
 
 ## Step 0 — find the work (read once, at the start of the run)
 
@@ -151,6 +155,10 @@ next run starts at Step 0 and finds the question under `asked_pending` until it 
 
 Only when Step 2 is done and no question of yours is open.
 
+Check the branch first: `git rev-parse --abbrev-ref HEAD` must be the repository's default branch
+(`gh repo view --json defaultBranchRef -q .defaultBranchRef.name`). If it is not, ask the user to
+switch to it and pull before you write the patch — the PR targets the default branch (4.4).
+
 ### 4.1 — gather context (deterministic, no LLM call)
 
 ```bash
@@ -223,6 +231,7 @@ uv run agent-cli apply-patch \
   --impact-report-file .feature-build-self-check.md \
   --test-command dotnet test \
   --branch-prefix feature-build \
+  --default-branch-base \
   --draft \
   --pr-title "Feature build: <one-line summary>" \
   --commit-message "feature-build: <one-line summary>"
@@ -231,7 +240,9 @@ uv run agent-cli apply-patch \
 This creates a `feature-build/<timestamp>` branch, applies the patch (`git apply --check`
 first), runs the test command, and only if it exits 0 does it commit, push, and open a
 **draft** `gh pr create --draft` — never marked ready for review or merged by this skill.
-It always returns to the original branch afterward. If the patch doesn't apply, tests
+The PR targets the repository's default branch (`--default-branch-base`); when another
+branch is checked out, it stops before touching anything and says which branch to switch to —
+switch, pull, and write the patch against that branch. It always returns to the original branch afterward. If the patch doesn't apply, tests
 fail, or push/PR creation fails, no PR is opened — the failure reason is in the printed
 JSON's `detail` field.
 
