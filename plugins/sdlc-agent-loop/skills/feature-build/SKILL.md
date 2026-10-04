@@ -31,11 +31,11 @@ call reasoning with none of this conversation's context.
 - A Design the Tech Lead signed in the web app. Step 0 lists what is ready; Step 1 admits it
   and writes the work file. Never build from an unsigned plan.
 - `agent-cli` must be installed from the pinned release wheel (**not** an editable checkout):
-  `uv tool install "vyomgrid-agent-platform @ https://github.com/Mikhil1990/sdlc-agent-loop-marketplace/releases/download/v0.7.2/vyomgrid_agent_platform-0.7.2-py3-none-any.whl"`,
+  `uv tool install "vyomgrid-agent-platform @ https://github.com/Mikhil1990/sdlc-agent-loop-marketplace/releases/download/v0.7.3/vyomgrid_agent_platform-0.7.3-py3-none-any.whl"`,
   and `gh` authenticated for the target repo. See
   [the plugin README § Prerequisites](../../README.md#prerequisites) for the full list
   (`codebase-memory-mcp`, `AGENT_PLATFORM_API_URL` / `_PAT`, an onboarded repo);
-  `agent-cli doctor` checks them.
+  `agent-cli doctor` checks them. If it says `agent-cli` is behind the newest version, tell the user to run the update lines in the README and update the plugin too, then stop.
 - A test command that actually validates the target repo (e.g. `dotnet test`, `pytest -q`,
   `npm test`). Without one, write and show the patch but don't apply it — ask the user for
   the right test command.

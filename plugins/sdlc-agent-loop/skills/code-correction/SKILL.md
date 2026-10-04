@@ -23,11 +23,11 @@ the correction pipeline — reasoning with none of this conversation's context.
   postmortem folder for there to be anything to correlate against (see the
   `incident-learning` skill for the postmortem format).
 - `agent-cli` must be installed from the pinned release wheel (**not** an editable checkout):
-  `uv tool install "vyomgrid-agent-platform @ https://github.com/Mikhil1990/sdlc-agent-loop-marketplace/releases/download/v0.7.2/vyomgrid_agent_platform-0.7.2-py3-none-any.whl"`,
+  `uv tool install "vyomgrid-agent-platform @ https://github.com/Mikhil1990/sdlc-agent-loop-marketplace/releases/download/v0.7.3/vyomgrid_agent_platform-0.7.3-py3-none-any.whl"`,
   and `gh` authenticated for the target repo. See
   [the plugin README § Prerequisites](../../README.md#prerequisites) for the full list
   (`codebase-memory-mcp`, `AGENT_PLATFORM_API_URL` / `_PAT`, an onboarded repo);
-  `agent-cli doctor` checks them. `agent-cli context` and `agent-cli apply-patch` do no
+  `agent-cli doctor` checks them. If it says `agent-cli` is behind the newest version, tell the user to run the update lines in the README and update the plugin too, then stop. `agent-cli context` and `agent-cli apply-patch` do no
   LLM/network call themselves — only git, the local codebase-map/product-rules/incidents
   files, and (for `apply-patch`) `gh`.
 - A test command that actually validates the target repo (e.g. `dotnet test`, `pytest -q`,

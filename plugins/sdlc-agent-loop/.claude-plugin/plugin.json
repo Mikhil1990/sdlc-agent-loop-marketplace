@@ -1,6 +1,6 @@
 {
   "name": "sdlc-agent-loop",
-  "version": "0.7.2",
+  "version": "0.7.3",
   "description": "The six-agent closed loop for AI-Assisted-Software-Development: Product Understanding, Incident Learning, Change Impact Analysis, Code Correction, and Feature Build. Traces blast radius on a diff, cites past incidents that touched the same code, proposes a test-validated safeguard PR, and builds a signed Design from the web app: tests its claims against your code, then writes a self-checked draft PR.",
   "author": {
     "name": "Mikhil1990",

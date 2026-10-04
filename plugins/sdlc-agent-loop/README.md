@@ -69,8 +69,8 @@ you do **not** need a checkout of this monorepo. A working install needs:
    this plugin's own release — **not** from PyPI, **not** an editable checkout. `uv tool`
    puts it in its own isolated environment and on your `PATH`:
    ```bash
-   uv tool install "vyomgrid-agent-platform @ https://github.com/Mikhil1990/sdlc-agent-loop-marketplace/releases/download/v0.7.2/vyomgrid_agent_platform-0.7.2-py3-none-any.whl"
-   agent-cli --version   # agent-cli 0.7.2
+   uv tool install "vyomgrid-agent-platform @ https://github.com/Mikhil1990/sdlc-agent-loop-marketplace/releases/download/v0.7.3/vyomgrid_agent_platform-0.7.3-py3-none-any.whl"
+   agent-cli --version   # agent-cli 0.7.3
    ```
    The plugin and this package release as a **locked pair** — one tag fixes both versions
    (ADR 0052 §3, [ADR 0228](../docs/decisions/0228-distribution-is-a-public-marketplace-repo-plus-a-release-attached-wheel.md)).
@@ -81,6 +81,9 @@ you do **not** need a checkout of this monorepo. A working install needs:
    ```bash
    uv tool install --upgrade vyomgrid-agent-platform --find-links https://github.com/Mikhil1990/sdlc-agent-loop-marketplace/releases/expanded_assets/latest
    ```
+   `agent-cli doctor` fails when the installed tool is older than the newest one the hosted app knows.
+   Then run the latest line above **and** `claude plugin update sdlc-agent-loop@sdlc-agent-loop-marketplace`.
+
    **Installed it before 0.7.2 under the old name `agent-platform`?** Run
    `uv tool uninstall agent-platform` first, then one of the lines above. Both names provide
    `agent-cli`, so the new install stops on the old one.
