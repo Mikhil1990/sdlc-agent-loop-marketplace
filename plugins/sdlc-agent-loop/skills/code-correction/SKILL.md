@@ -23,7 +23,7 @@ the correction pipeline — reasoning with none of this conversation's context.
   postmortem folder for there to be anything to correlate against (see the
   `incident-learning` skill for the postmortem format).
 - `agent-cli` must be installed from the pinned release wheel (**not** an editable checkout):
-  `uv tool install "agent-platform @ https://github.com/Mikhil1990/sdlc-agent-loop-marketplace/releases/download/v0.6.15/agent_platform-0.6.15-py3-none-any.whl"`,
+  `uv tool install "agent-platform @ https://github.com/Mikhil1990/sdlc-agent-loop-marketplace/releases/download/v0.7.0/agent_platform-0.7.0-py3-none-any.whl"`,
   and `gh` authenticated for the target repo. See
   [the plugin README § Prerequisites](../../README.md#prerequisites) for the full list
   (`codebase-memory-mcp`, `AGENT_PLATFORM_API_URL` / `_PAT`, an onboarded repo);

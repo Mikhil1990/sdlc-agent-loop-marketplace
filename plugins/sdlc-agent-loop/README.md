@@ -14,10 +14,9 @@ All six skills are implemented:
 | `incident-learning` | `agent_core/agents/incident_learning.py` | native (standalone script, no LLM) | ✅ implemented |
 | `change-impact` | `agent_core/agents/product_understanding.py` + `incident_learning.py` + `change_impact.py` | **native** — `agent-cli context` gathers data, this session writes the report | ✅ implemented |
 | `code-correction` | the above + `agent_core/agents/code_correction.py` | **native** — `agent-cli context`/`apply-patch` do the deterministic parts, this session writes the patch | ✅ implemented |
-| `feature-planning` | `agent_core/agents/feature_planning.py` | **native** — `agent-cli admit-packet` (Step 0, fails closed on a missing/unsigned `feature_intent` packet), then `agent-cli plan-context` gathers data, this session asks clarifying questions and writes the spec/task file | ✅ implemented |
-| `feature-build` | `agent_core/agents/feature_build.py` + reuses `change_impact.py`'s rules for self-check | **native** — `agent-cli admit-packet` (Step 0, fails closed on a missing/unsigned `feature_spec` packet), then `agent-cli plan-context`/`apply-patch` do the deterministic parts, this session writes the patch + self-check | ✅ implemented |
+| `feature-build` | `agent_core/agents/feature_build.py` + reuses `change_impact.py`'s rules for self-check | **native** — `agent-cli ready-work`, then `admit-packet --approval-id` (fails closed on a missing/unsigned `feature_spec` packet) writes a local work file; Mode A tests the Design's evidence claims against the code and routes questions with `agent-cli ask`; Mode B (`plan-context`/`apply-patch`) writes the patch + self-check; `report-run --build-record` sends one build record back | ✅ implemented |
 
-`feature-planning`/`feature-build` were pulled forward from the platform's Phase 2 into
+`feature-build` was pulled forward from the platform's Phase 2 into
 the wedge (2026-08-16 decision, see `docs/status/current-implementation.md` § "six-agent closed
 loop") and built natively from the start, following the same pattern `change-impact`/
 `code-correction` were rewritten into. `feature-build` never merges or marks a PR ready
@@ -70,8 +69,8 @@ you do **not** need a checkout of this monorepo. A working install needs:
    this plugin's own release — **not** from PyPI, **not** an editable checkout. `uv tool`
    puts it in its own isolated environment and on your `PATH`:
    ```bash
-   uv tool install "agent-platform[monitoring] @ https://github.com/Mikhil1990/sdlc-agent-loop-marketplace/releases/download/v0.6.15/agent_platform-0.6.15-py3-none-any.whl"
-   agent-cli --version   # agent-cli 0.6.15
+   uv tool install "agent-platform[monitoring] @ https://github.com/Mikhil1990/sdlc-agent-loop-marketplace/releases/download/v0.7.0/agent_platform-0.7.0-py3-none-any.whl"
+   agent-cli --version   # agent-cli 0.7.0
    ```
    The `[monitoring]` extra is recommended: `agent-cli doctor`'s packet-wiring check needs it.
    The plugin and this package release as a **locked pair** — one tag fixes both versions
@@ -92,7 +91,7 @@ Run **`agent-cli doctor --repo-path <target repo>`** to check items 2, 3 and 6 b
 invoking a skill — it prints each missing item and exits non-zero.
 
 - No LLM API key is needed for any skill: `product-understanding`/`incident-learning`
-  never call an LLM, and `change-impact`/`code-correction`/`feature-planning`/`feature-build`
+  never call an LLM, and `change-impact`/`code-correction`/`feature-build`
   reason natively in the calling session rather than calling one out-of-band.
 - `code-correction`/`feature-build` additionally need `gh` authenticated for the target
   repo (to open the PR) and a working test command for that repo.
@@ -105,7 +104,7 @@ invoking a skill — it prints each missing item and exits non-zero.
    ```
    Invoke skills as `/sdlc-agent-loop:product-understanding`,
    `/sdlc-agent-loop:incident-learning`, `/sdlc-agent-loop:change-impact`,
-   `/sdlc-agent-loop:code-correction`, `/sdlc-agent-loop:feature-planning`, or
+   `/sdlc-agent-loop:code-correction`, or
    `/sdlc-agent-loop:feature-build`.
 2. Test real install behavior:
    ```
@@ -135,9 +134,7 @@ claude_plugin/
 │   │   └── SKILL.md                   # uses `agent-cli context`; reasons natively
 │   ├── code-correction/
 │   │   └── SKILL.md                   # uses `agent-cli context`/`apply-patch`; reasons natively
-│   ├── feature-planning/
-│   │   └── SKILL.md                   # uses `agent-cli admit-packet` (Step 0), `plan-context`; reasons natively
 │   └── feature-build/
-│       └── SKILL.md                   # uses `agent-cli admit-packet` (Step 0), `plan-context`/`apply-patch --draft`; reasons natively
+│       └── SKILL.md                   # `ready-work`, `admit-packet --approval-id`, Mode A then Mode B, `apply-patch --draft`, `report-run --build-record`
 └── README.md
 ```
