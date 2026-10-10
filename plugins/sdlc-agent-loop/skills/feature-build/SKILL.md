@@ -31,7 +31,7 @@ call reasoning with none of this conversation's context.
 - A Design the Tech Lead signed in the web app. Step 0 lists what is ready; Step 1 admits it
   and writes the work file. Never build from an unsigned plan.
 - `agent-cli` must be installed from the pinned release wheel (**not** an editable checkout):
-  `uv tool install "vyomgrid-agent-platform @ https://github.com/Mikhil1990/sdlc-agent-loop-marketplace/releases/download/v0.7.3/vyomgrid_agent_platform-0.7.3-py3-none-any.whl"`,
+  `uv tool install "vyomgrid-agent-platform @ https://github.com/Mikhil1990/sdlc-agent-loop-marketplace/releases/download/v0.7.4/vyomgrid_agent_platform-0.7.4-py3-none-any.whl"`,
   and `gh` authenticated for the target repo. See
   [the plugin README § Prerequisites](../../README.md#prerequisites) for the full list
   (`codebase-memory-mcp`, `AGENT_PLATFORM_API_URL` / `_PAT`, an onboarded repo);
@@ -126,6 +126,9 @@ Read `## Evidence page` in the work file.
 
 - If it says **"No claims to check for this request — …"**, say so to the user, write that line
   under `## Mode A results`, and go to Step 3's questions (if any) and then Step 4.
+- If it ends with a **"Not checked — batches … could not be read …"** line, part of the page could
+  not be written. Test the listed items as below, tell the developer which parts were not read,
+  and copy that line under `## Mode A results`.
 - Otherwise, for **each evidence item**, search the local code and write one result under
   `## Mode A results` in the work file:
   - **confirmed** — the code matches the statement.

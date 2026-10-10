@@ -24,7 +24,7 @@ whatever the one-shot subprocess call produced.
   `constitution/product/product-rules.md` must exist (run `uv run agent-cli onboard-repo
   --repo-url <url>` first if not).
 - `agent-cli` must be installed in the environment running this skill, from the pinned
-  release wheel (**not** an editable checkout): `uv tool install "vyomgrid-agent-platform @ https://github.com/Mikhil1990/sdlc-agent-loop-marketplace/releases/download/v0.7.3/vyomgrid_agent_platform-0.7.3-py3-none-any.whl"`.
+  release wheel (**not** an editable checkout): `uv tool install "vyomgrid-agent-platform @ https://github.com/Mikhil1990/sdlc-agent-loop-marketplace/releases/download/v0.7.4/vyomgrid_agent_platform-0.7.4-py3-none-any.whl"`.
   See [the plugin README § Prerequisites](../../README.md#prerequisites) for the full list
   (Python + `uv`, `codebase-memory-mcp` on `PATH`, `AGENT_PLATFORM_API_URL` / `_PAT`, an
   onboarded repo); `agent-cli doctor` checks them. If it says `agent-cli` is behind the newest version, tell the user to run the update lines in the README and update the plugin too, then stop. Only `agent-cli context` is used here —

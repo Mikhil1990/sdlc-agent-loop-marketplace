@@ -69,8 +69,8 @@ you do **not** need a checkout of this monorepo. A working install needs:
    this plugin's own release — **not** from PyPI, **not** an editable checkout. `uv tool`
    puts it in its own isolated environment and on your `PATH`:
    ```bash
-   uv tool install "vyomgrid-agent-platform @ https://github.com/Mikhil1990/sdlc-agent-loop-marketplace/releases/download/v0.7.3/vyomgrid_agent_platform-0.7.3-py3-none-any.whl"
-   agent-cli --version   # agent-cli 0.7.3
+   uv tool install "vyomgrid-agent-platform @ https://github.com/Mikhil1990/sdlc-agent-loop-marketplace/releases/download/v0.7.4/vyomgrid_agent_platform-0.7.4-py3-none-any.whl"
+   agent-cli --version   # agent-cli 0.7.4
    ```
    The plugin and this package release as a **locked pair** — one tag fixes both versions
    (ADR 0052 §3, [ADR 0228](../docs/decisions/0228-distribution-is-a-public-marketplace-repo-plus-a-release-attached-wheel.md)).
